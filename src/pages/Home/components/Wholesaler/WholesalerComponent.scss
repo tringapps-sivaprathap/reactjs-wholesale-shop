@@ -1,0 +1,22 @@
+@mixin flexDisplay($option) {
+  display: flex;
+  align-items: center;
+  justify-content: $option;
+}
+
+.wholesaler-container {
+  grid-area: wholesaler;
+  border: 2px solid black;
+  height: 15vh;
+  @include flexDisplay(space-evenly);
+
+  div {
+    @include flexDisplay(center);
+    flex-direction: column;
+    border: 2px solid black;
+
+    & > * {
+      margin: .5rem;
+    }
+  }
+}

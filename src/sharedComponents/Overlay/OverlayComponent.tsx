@@ -1,10 +1,10 @@
-import '../../assets/overlay.css'
+import './OverlayComponent.css'
 
-type OverlayProps = {
+type OverlayComponentProps = {
   setShowOverlay: (argument: boolean) => void
 }
 
-const Overlay = ({ setShowOverlay }: OverlayProps) => {
+const OverlayComponent = ({ setShowOverlay }: OverlayComponentProps) => {
   return (
     <div className="overlay-container">
       <div className='overlay'>
@@ -15,4 +15,4 @@ const Overlay = ({ setShowOverlay }: OverlayProps) => {
   )
 }
 
-export default Overlay
+export default OverlayComponent

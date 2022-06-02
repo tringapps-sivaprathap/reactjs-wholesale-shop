@@ -1,8 +1,10 @@
-type WholesalerProps = {
+import './WholesalerComponent.css'
+
+type WholesalerComponentProps = {
   setShowOverlay: (argument: boolean) => void
 }
 
-const Wholesaler = ({ setShowOverlay }: WholesalerProps) => {
+const WholesalerComponent = ({ setShowOverlay }: WholesalerComponentProps) => {
   return (
     <div className="wholesaler-container">
       <h2>Name: Sivaprathap</h2>
@@ -25,4 +27,4 @@ const Wholesaler = ({ setShowOverlay }: WholesalerProps) => {
   )
 }
 
-export default Wholesaler
+export default WholesalerComponent

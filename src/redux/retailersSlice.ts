@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { v4 as uuidv4 } from 'uuid'
 
 type Retailer = {
   id: string,
@@ -14,14 +13,18 @@ type Retailer = {
 
 type InitialState = {
   retailers: {
-    retailer1: Retailer,
-    retailer2: Retailer,
-    retailer3: Retailer
+    retailer1: Retailer | [],
+    retailer2: Retailer | [],
+    retailer3: Retailer | []
   }
 }
 
 const initialState: InitialState = {
-
+  retailers: {
+    retailer1: [],
+    retailer2: [],
+    retailer3: []
+  }
 }
 
 const retailersSlice = createSlice({
