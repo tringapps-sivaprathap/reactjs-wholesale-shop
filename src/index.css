@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.base-container {
+  display: grid;
+  grid-template-areas: 
+  'wholesaler wholesaler wholesaler'
+  'retailer1 retailer2 retailer3';
+}
+
+.wholesaler-container {
+  grid-area: wholesaler;
+  border: 2px solid black;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.wholesaler-container div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px solid black;
+}
+
+.wholesaler-container div > * {
+  margin: .5rem;
+}
+
+.retailer {
+  border: 2px solid black;
+  min-height: 85vh;
+  border-style: solid;
+  border-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.retailer-1-container {
+  grid-area: retailer1;
+  border-width: 0 0 2px 2px;
+  
+}
+
+.retailer-2-container {
+  grid-area: retailer2;
+  border-width: 0 2px 2px 2px;
+}
+
+.retailer-3-container {
+  grid-area: retailer3;
+  border-width: 0 2px 2px 0;
+}
