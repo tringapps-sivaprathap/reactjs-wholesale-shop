@@ -1,0 +1,23 @@
+@mixin flexDisplay($jc: center, $fd: row) {
+  display: flex;
+  align-items: center;
+  justify-content: $jc;
+  flex-direction: $fd;
+}
+
+.retailer-container {
+  border: 2px solid black;
+  min-height: 85vh;
+  @include flexDisplay(flex-start, column);
+
+  .retailer-header {
+    border: 2px solid black;
+    width: 100%;
+    padding: 2vh 0;
+    @include flexDisplay($fd: column);
+
+    & > * {
+      padding: 1vh 0;
+    }
+  }
+}

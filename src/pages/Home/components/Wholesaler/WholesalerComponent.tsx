@@ -1,4 +1,4 @@
-import './WholesalerComponent.css'
+import './WholesalerComponent.scss'
 
 type WholesalerComponentProps = {
   setShowOverlay: (argument: boolean) => void

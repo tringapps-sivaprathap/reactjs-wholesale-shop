@@ -1,5 +1,0 @@
-.home-container {
-  display: -ms-grid;
-  display: grid;
-      grid-template-areas: 'wholesaler wholesaler wholesaler' 'retailer1 retailer2 retailer3';
-}

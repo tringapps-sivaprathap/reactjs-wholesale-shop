@@ -1,0 +1,5 @@
+.retailers-container {
+  grid-area: retailers;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

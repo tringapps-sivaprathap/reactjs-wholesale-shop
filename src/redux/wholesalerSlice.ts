@@ -19,6 +19,12 @@ const initialState: InitialState = {
       name: 'rice',
       stock: 15,
       price: 35
+    },
+    {
+      id: uuidv4(),
+      name: 'tomato',
+      stock: 20,
+      price: 25
     }
   ]
 }
@@ -27,8 +33,8 @@ const wholesalerSlice = createSlice({
   name: 'wholesaler',
   initialState,
   reducers: {
-
   }
+  
 })
 
 export default wholesalerSlice.reducer
