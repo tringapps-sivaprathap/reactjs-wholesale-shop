@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useAppSelector } from '../../redux/hook'
 import { useForm, useFieldArray, useWatch } from 'react-hook-form'
 import './OverlayComponent.scss'
 
@@ -19,18 +20,33 @@ type FormData = {
 }[]
 
 const OverlayComponent = ({ setShowOverlay }: OverlayComponentProps) => {
-  const [formData ,setFormData] = useState<FormData>([])
-  const { register, control, handleSubmit, formState: { errors } } = useForm<Inputs>()
+  const products = useAppSelector((state) => state.wholesaler.products)
+  // const [tempState, setTempState] = useState()
+  // const [formData ,setFormData] = useState<FormData>([])
+  const { register, control, handleSubmit, formState: { errors } } = useForm<Inputs>({
+    defaultValues: {
+      cart: [{product: '', quantity: 0}]
+    }
+  })
   const { fields, append, remove } = useFieldArray({
     name: 'cart',
     control
   })
-  const formvalue = useWatch({name: 'cart', control})
+
+  const formData = useWatch({name: 'cart', control})
+  console.log(formData)
+  // useEffect(() => {
+  //   setFormData(tempFormData)
+  // }, [tempFormData])
+
+  const productPrice = (name: string): number | undefined => {
+    const product = products.find((product) => product.name === name)
+    return product?.price
+  }
 
   const onsubmit = (data: Inputs) => {
-    // console.log(data);
-    setFormData(formvalue);
-    console.log(formData)
+    // setFormData(tempFormData);
+    // console.log(formData)
   }
 
   return (
@@ -53,7 +69,11 @@ const OverlayComponent = ({ setShowOverlay }: OverlayComponentProps) => {
                   placeholder='quantity'
                   {...register(`cart.${index}.quantity` as const, {required: true, valueAsNumber: true})}
                   className={errors?.cart?.[index]?.quantity ? "error" : ""}
+                  max={4}
                 />
+
+                {/* <span>{formData[index].product}</span> */}
+                <span>{formData[index]?.product ? productPrice(formData[index].product) : 0}</span>
 
                 <button
                   type='button'
@@ -74,7 +94,7 @@ const OverlayComponent = ({ setShowOverlay }: OverlayComponentProps) => {
 
           <input type="submit" />
         </form>
-        {/* <button onClick={() => setShowOverlay(false)}>Cancel</button> */}
+        <button onClick={() => setShowOverlay(false)}>Cancel</button>
       </div>
     </div>
   )

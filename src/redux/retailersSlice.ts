@@ -59,18 +59,21 @@ const retailersSlice = createSlice({
   initialState,
   reducers: {
     purchased: (state, action) => {
+      // payload -> id, product, quantity
       const index = state.retailers.findIndex((retailer) => retailer.id === action.payload.id)
+
       state.retailers[index].products = state.retailers[index].products.map((product) => {
         if(product.name === action.payload.product)
-        return {...product, stock: product.stock += action.payload.quantity}
-        else return {...product}
+          return { ...product, stock: product.stock += action.payload.quantity }
+        else
+          return { ...product }
       })
     },
-    purchaseCanceled: (state, action) => {
+    purchaseCancelled: (state, action) => {
 
     }
   }
 })
 
 export default retailersSlice.reducer
-export const {purchased, purchaseCanceled} = retailersSlice.actions
+export const {purchased, purchaseCancelled} = retailersSlice.actions
