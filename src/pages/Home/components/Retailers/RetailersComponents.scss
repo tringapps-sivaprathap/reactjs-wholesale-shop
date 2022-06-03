@@ -1,7 +1,8 @@
-@mixin flexDisplay($option) {
+@mixin flexDisplay($option, $direction: row) {
   display: flex;
   align-items: center;
   justify-content: $option;
+  flex-direction: $direction;
 }
 
 .retailer {
@@ -9,13 +10,24 @@
   min-height: 85vh;
   border-style: solid;
   border-color: black;
-  @include flexDisplay(center);
+  @include flexDisplay(flex-start, column);
+
+  .retailer-header {
+    background-color: yellow;
+    width: 100%;
+    padding: 2vh 0;
+    @include flexDisplay(center, column);
+
+    & > * {
+      padding: 1vh 0;
+    }
+  }
 }
 
 .retailer-1-container {
   grid-area: retailer1;
   border-width: 0 0 2px 2px;
-  
+  max-width: calc(100vw / 3);
 }
 
 .retailer-2-container {

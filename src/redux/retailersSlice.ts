@@ -13,17 +13,28 @@ type Retailer = {
 
 type InitialState = {
   retailers: {
-    retailer1: Retailer | [],
-    retailer2: Retailer | [],
-    retailer3: Retailer | []
+    retailer1: Retailer,
+    retailer2: Retailer | {},
+    retailer3: Retailer | {}
   }
 }
 
 const initialState: InitialState = {
   retailers: {
-    retailer1: [],
-    retailer2: [],
-    retailer3: []
+    retailer1: {
+        id: '1',
+        c_user: false,
+        name: 'kumar',
+        address: '34, joseph st., kamarajapuram, madurai - 9',
+        products: [
+          {
+            name: 'rice',
+            stock: 5
+          }
+        ]
+      },
+    retailer2: {},
+    retailer3: {}
   }
 }
 
