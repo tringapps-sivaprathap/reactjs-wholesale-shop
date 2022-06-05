@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { purchased } from './retailersSlice'
 import { v4 as uuidv4 } from 'uuid'
-import { stat } from 'fs'
 
 type InitialState = {
   name: string
@@ -9,7 +8,8 @@ type InitialState = {
     id: string,
     name: string,
     stock: number,
-    price: number
+    price: number,
+    // available: boolean
   }[]
 }
 
@@ -19,14 +19,23 @@ const initialState: InitialState = {
     {
       id: uuidv4(),
       name: 'rice',
-      stock: 15,
-      price: 35
+      stock: 200,
+      price: 35,
+      // available: true,
     },
     {
       id: uuidv4(),
       name: 'tomato',
-      stock: 20,
-      price: 25
+      stock: 250,
+      price: 25,
+      // available: true,
+    },
+    {
+      id: uuidv4(),
+      name: 'carrot',
+      stock: 150,
+      price: 45,
+      // available: true,
     }
   ]
 }
@@ -37,7 +46,7 @@ const wholesalerSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(purchased, (state, action) => {
-      const index = state.products.findIndex((product) => product.name === action.payload.product)
+      const index = state.products.findIndex((product) => product.name === action.payload.name)
 
       state.products[index].stock -= action.payload.quantity 
     })

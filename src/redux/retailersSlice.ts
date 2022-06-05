@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuidv4 } from 'uuid'
 
 type InitialState = {
   retailers: {
@@ -16,7 +17,7 @@ type InitialState = {
 const initialState: InitialState = {
   retailers: [
     {
-      id: '1',
+      id: uuidv4(),
       c_user: false,
       name: 'kumar',
       address: '34, joseph st., kamarajapuram, madurai - 9',
@@ -28,7 +29,7 @@ const initialState: InitialState = {
       ]
     },
     {
-      id: '2',
+      id: uuidv4(),
       c_user: false,
       name: 'kamal',
       address: '34, joseph st., kamarajapuram, madurai - 9',
@@ -40,7 +41,7 @@ const initialState: InitialState = {
       ]
     },
     {
-      id: '3',
+      id: uuidv4(),
       c_user: false,
       name: 'rajini',
       address: '34, joseph st., kamarajapuram, madurai - 9',
@@ -58,22 +59,28 @@ const retailersSlice = createSlice({
   name: 'retailers',
   initialState,
   reducers: {
-    purchased: (state, action) => {
-      // payload -> id, product, quantity
-      const index = state.retailers.findIndex((retailer) => retailer.id === action.payload.id)
-
-      state.retailers[index].products = state.retailers[index].products.map((product) => {
-        if(product.name === action.payload.product)
-          return { ...product, stock: product.stock += action.payload.quantity }
-        else
-          return { ...product }
+    purchased: (state, action) => { // payload -> id, name, quantity
+      const retailerIndex = state.retailers.findIndex((retailer) => retailer.id === action.payload.id)
+      const productIndex = state.retailers[retailerIndex].products.findIndex((product) => {
+        return product.name == action.payload.name
       })
-    },
-    purchaseCancelled: (state, action) => {
 
+      if(productIndex === -1) {
+        state.retailers[retailerIndex].products.push({ name: action.payload.name, stock: action.payload.quantity})
+      }
+      else {
+        state.retailers[retailerIndex].products[productIndex].stock += action.payload.quantity
+      }
+
+      // state.retailers[index].products = state.retailers[index].products.map((product) => {
+      //   if(product.name === action.payload.name)
+      //     return { ...product, stock: product.stock += action.payload.quantity }
+      //   else
+      //     return { ...product }
+      // })
     }
   }
 })
 
 export default retailersSlice.reducer
-export const {purchased, purchaseCancelled} = retailersSlice.actions
+export const {purchased} = retailersSlice.actions

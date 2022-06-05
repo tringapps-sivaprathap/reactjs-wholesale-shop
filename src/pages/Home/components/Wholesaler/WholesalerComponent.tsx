@@ -1,28 +1,36 @@
+import { FC } from 'react'
+import { useAppSelector } from '../../../../redux/hook'
 import './WholesalerComponent.scss'
 
-type WholesalerComponentProps = {
-  setShowOverlay: (argument: boolean) => void
+interface Retailer {
+  id: string,
+  c_user: boolean,
+  name: string,
+  address: string,
+  products: {
+    name: string,
+    stock: number
+  }[]
 }
 
-const WholesalerComponent = ({ setShowOverlay }: WholesalerComponentProps) => {
+type WholesalerComponentProps = {
+  setRetailer: React.Dispatch<React.SetStateAction<Retailer>>,
+  setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const WholesalerComponent: FC<WholesalerComponentProps> = ({ setRetailer, setShowOverlay }) => {
+  const retailers = useAppSelector((state) => state.retailers.retailers)
+
   return (
     <div className="wholesaler-container">
       <h2>Name: Sivaprathap</h2>
       
-      <div>
-        <span>Retailer 1</span>
-        <button onClick={() => setShowOverlay(true)}>Supply</button>
-      </div>
-
-      <div>
-        <span>Retailer 2</span>
-        <button onClick={() => setShowOverlay(true)}>Supply</button>
-      </div>
-
-      <div>
-        <span>Retailer 3</span>
-        <button onClick={() => setShowOverlay(true)}>Supply</button>
-      </div>
+      {retailers.map((retailer) => (
+        <div key={retailer.id}>
+          <span>{retailer.name} Shop</span>
+          <button onClick={() => {setShowOverlay(true); setRetailer(retailer);}}>Supply</button>
+        </div>
+      ))}
     </div>
   )
 }

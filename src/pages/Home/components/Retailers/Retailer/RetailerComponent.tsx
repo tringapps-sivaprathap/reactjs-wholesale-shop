@@ -24,7 +24,12 @@ const RetailerComponent = ( { retailer }: RetailerProps) => {
       </div>
 
       <div className='retailer-content'>
-        {products.map(((product) => product.name))}
+        {products.map((product) => (
+          <div key={product.name}>
+            <p><b>Name:</b> {product.name}</p>
+            <p><b>Quantity:</b> {product.stock}</p>
+          </div>
+        ))}
       </div>
     </div>
   )
