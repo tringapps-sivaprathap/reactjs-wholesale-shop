@@ -1,3 +1,10 @@
+@mixin displayFlex($jc: center, $fd: row) {
+  display: flex;
+  align-items: center;
+  justify-content: $jc;
+  flex-direction: $fd;
+}
+
 .overlay-container {
   position: absolute;
   top: 0;
@@ -5,16 +12,26 @@
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  @include displayFlex(center);
 
-.overlay {
-  background-color: bisque;
-  width: 80vw;
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .overlay {
+    background-color: bisque;
+    width: 80vw;
+    height: 80vh;
+    @include displayFlex(flex-start, column);
+
+    .overlay-header {
+      background-color: yellow;
+      width: 100%;
+      padding: 1rem;
+      @include displayFlex(space-around)
+    }
+
+    .overlay-content {
+      background-color: orange;
+      width: 100%;
+      padding: 1rem;
+      @include displayFlex(space-around, column)
+    }
+  }
 }
