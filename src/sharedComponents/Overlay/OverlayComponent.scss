@@ -10,28 +10,34 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 100%;
   @include displayFlex(center);
 
   .overlay {
-    background-color: bisque;
-    width: 80vw;
-    height: 80vh;
+    margin: 10vh 0;
+    background-color: #FDF5DF;
+    width: 80%;
+    min-height: 80vh;
     @include displayFlex(flex-start, column);
 
     .overlay-header {
-      background-color: yellow;
+      background-color: #373A36;
+      color: white;
       width: 100%;
       padding: 1rem;
-      @include displayFlex(space-around)
+      @include displayFlex(space-around);
+      font-size: 1.3rem;
+
+      span > * {
+        color: yellow;
+      }
     }
 
     .overlay-content {
-      background-color: orange;
       width: 100%;
-      padding: 1rem;
-      @include displayFlex(space-around, column)
+      @include displayFlex(space-around, column);
+      position: relative;
     }
   }
 }

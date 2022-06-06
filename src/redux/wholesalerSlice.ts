@@ -8,34 +8,30 @@ type InitialState = {
     id: string,
     name: string,
     stock: number,
-    price: number,
-    // available: boolean
+    price: number
   }[]
 }
 
 const initialState: InitialState = {
-  name: 'SivaMart',
+  name: 'DC Mart',
   products: [
     {
       id: uuidv4(),
-      name: 'rice',
+      name: 'Rice',
       stock: 200,
-      price: 35,
-      // available: true,
+      price: 35
     },
     {
       id: uuidv4(),
-      name: 'tomato',
+      name: 'Tomato',
       stock: 250,
-      price: 25,
-      // available: true,
+      price: 25
     },
     {
       id: uuidv4(),
-      name: 'carrot',
+      name: 'Carrot',
       stock: 150,
-      price: 45,
-      // available: true,
+      price: 45
     }
   ]
 }

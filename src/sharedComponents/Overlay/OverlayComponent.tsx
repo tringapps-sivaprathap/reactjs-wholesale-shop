@@ -23,8 +23,8 @@ const OverlayComponent: FC<OverlayComponentProps> = ({ retailer, setShowOverlay 
     <div className="overlay-container">
       <div className='overlay'>
         <div className='overlay-header'>
-          <span>{retailer.name}</span>
-          <span>{retailer.address}</span>
+          <span><span>Name:</span> {retailer.name}</span>
+          <span><span>Address:</span> {retailer.address}</span>
         </div>
         <div className='overlay-content'>
           <PurchaseComponent retailer={retailer} setShowOverlay={setShowOverlay} />

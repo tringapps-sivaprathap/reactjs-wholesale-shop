@@ -1,0 +1,86 @@
+$color-1: #D48166;
+$color-2: #E6E2DD;
+
+@mixin displayFlex($jc: center, $fd: row) {
+  display: flex;
+  align-items: center;
+  justify-content: $jc;
+  flex-direction: $fd;
+}
+
+@mixin iconStyle($fs: 1.5rem) {
+  @include displayFlex(center);
+  font-size: $fs;
+  border: none;
+  background-color: transparent;
+}
+
+.purchase-header {
+  background-color: $color-1;
+  color: white;
+  @include displayFlex(center);
+  padding: 1rem;
+  width: 100%;
+  font-size: 1.3rem;
+
+  button {
+    position: absolute;
+    right: 3vw;
+    @include iconStyle();
+    color: white;
+  }
+}
+
+.purchase-form {
+  width: 100%;
+  @include displayFlex(center, column);
+
+  .single-purchase-form {
+    background-color: $color-2;
+    @include displayFlex(center);
+    border: 2px solid #373A36;
+    margin: 1rem;
+    padding: .5rem;
+    
+    & > * {
+      margin: 1vh 1.5vw;
+    }
+
+    div {
+      @include displayFlex(center, column);
+      
+      > * {
+        margin: .3rem;
+      }
+
+      :last-child {
+        padding: .3rem;
+      }
+
+      .price {
+        background-color: white;
+        padding: .3rem 1rem;
+      }
+    }
+
+    button {
+      @include iconStyle(1.6rem);
+    }
+  }
+
+  :last-child {
+    @include displayFlex(center);
+
+    > * {
+      margin: 2vh 3vw;
+    }
+
+    button {
+      background-color: $color-1;
+      color: white;
+      border: none;
+      padding: .5rem;
+      font-size: 1.1rem;
+    }
+  }
+}

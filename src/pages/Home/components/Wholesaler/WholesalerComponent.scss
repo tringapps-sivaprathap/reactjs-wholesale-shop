@@ -5,18 +5,32 @@
 }
 
 .wholesaler-container {
+  background-color: #373A36;
+  color: white;
   grid-area: wholesaler;
-  border: 2px solid black;
   height: 15vh;
   @include flexDisplay(space-evenly);
 
   div {
+    background-color: #E6E2DD;
+    color: black;
     @include flexDisplay(center);
     flex-direction: column;
-    border: 2px solid black;
+    min-width: 8vw;
 
     & > * {
       margin: .5rem;
+    }
+
+    span {
+      font-size: 1.1rem;
+    }
+
+    button {
+      border: none;
+      padding: 1vh 1vw;
+      background-color: #2f4454;
+      color: white;
     }
   }
 }

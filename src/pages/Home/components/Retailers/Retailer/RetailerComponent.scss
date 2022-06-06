@@ -1,3 +1,8 @@
+$color1: #D48166;
+$color2: #E6E2DD;
+$color3: #373A36;
+$color4: #FDF5DF;
+
 @mixin flexDisplay($jc: center, $fd: row) {
   display: flex;
   align-items: center;
@@ -6,18 +11,42 @@
 }
 
 .retailer-container {
-  border: 2px solid black;
+  background-color: $color4;
   min-height: 85vh;
   @include flexDisplay(flex-start, column);
 
   .retailer-header {
-    border: 2px solid black;
+    background-color: $color1;
+    color: white;
     width: 100%;
     padding: 2vh 0;
+    font-size: 1.2rem;
     @include flexDisplay($fd: column);
 
-    & > * {
+    p {
       padding: 1vh 0;
+      text-align: center;
+
+      span {
+        color: yellow;
+      }
+    }
+  }
+
+  .retailer-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+
+    div {
+      background-color: #E6E2DD;
+      margin: 1rem;
+      padding: .5rem;
+      @include flexDisplay(center, column);
+
+      p {
+        margin: .5rem;
+      }
     }
   }
 }

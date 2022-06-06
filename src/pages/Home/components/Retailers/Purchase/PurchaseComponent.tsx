@@ -2,6 +2,9 @@ import { useState, useEffect, FC } from 'react'
 import { useAppSelector, useAppDispatch } from '../../../../../redux/hook'
 import { purchased } from '../../../../../redux/retailersSlice'
 import { useForm, useFieldArray, useWatch } from 'react-hook-form'
+import { SiAddthis } from 'react-icons/si';
+import { AiFillDelete } from 'react-icons/ai';
+
 import './PurchaseComponent.scss'
 
 type Retailer = {
@@ -100,48 +103,51 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
     return null
   }
 
-  const getPrice = (index: number): number | null => {
+  const getPrice = (index: number): string => {
     if(formValues[index]?.name && formValues[index].name !== '')
-      return products[getIndex(formValues[index].name)].price
-    return null
+        return String(products[getIndex(formValues[index].name)].price)
+    return '-'
   }
 
-  const calculatePrice = (index: number): string | null => {
+  const calculatePrice = (index: number): string => {
     if(formValues[index]?.name && formValues[index]?.quantity) {
       if(formValues[index].name !== '' && formValues[index].quantity !== 0) {
         if(products[getIndex(formValues[index].name)]?.available === true && formValues[index].quantity !== 0) 
           return String(products[getIndex(formValues[index].name)].price * formValues[index].quantity)
-        else
-          return '-'
       }
     }
-    return null
+    return '-'
   }
 
   const onSubmit = (data: Inputs) => {
     data.cart.forEach((product) => {
       dispatch(purchased({id: retailer.id, name: product.name, quantity: product.quantity}))
     })
+    setShowOverlay(false)
   }
 
   return (
     <>
-      <div>
-        <span>purchase something</span>
-        <button type='button' onClick={() => append({name: '', quantity: 0})}>Append</button>
+      <div className='purchase-header'>
+        <span>Enter What You Want To Supply</span>
+        <button onClick={() => append({name: '', quantity: 0})}><SiAddthis /></button>
       </div>
       
-
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className='purchase-form'>
         {fields.map((field, index) => (
-            <div key={field.id}>
+          <div key={field.id} className='single-purchase-form'>
+            <div>
+              <span>Product</span>
               <select
-                {...register(`cart.${index}.name` as const, {required: true})}
-                className={errors?.cart?.[index]?.name ? "error" : ""}
-                >
-                {products.map((product) => <option key={product.id} value={product.name}>{product.name}</option>)}
-              </select>
-
+              {...register(`cart.${index}.name` as const, {required: true})}
+              className={errors?.cart?.[index]?.name ? "error" : ""}
+              >
+              {products.map((product) => <option key={product.id} value={product.name}>{product.name}</option>)}
+            </select>
+            </div>
+           
+            <div>
+              <span>Quantity</span>
               <input
                 defaultValue={0} type="number" placeholder='quantity'
                 {...register(`cart.${index}.quantity` as const, {required: true, valueAsNumber: true})}
@@ -149,20 +155,28 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
                 min={1}
                 {...(getStock(index) !== null && {max: `${getStock(index)}`})}
               />
-
-              <span>{checkAvailability(index) !== null && checkAvailability(index)}</span>
-
-              <span>{getPrice(index) !== null && getPrice(index)}</span>
-
-              <span>{calculatePrice(index) !== null && calculatePrice(index)}</span>
-
-              <button type='button' onClick={() => remove(index)}>Delete</button>
             </div>
+
+            <div>
+              <span>Price</span>
+              <span className='price'>{getPrice(index) !== null && getPrice(index)}</span>
+            </div>
+
+            <div>
+              <span>Total</span>
+              <span className='price'>{calculatePrice(index) !== null && calculatePrice(index)}</span>
+            </div>
+
+            {checkAvailability(index) !== null && <span>{checkAvailability(index)}</span>}
+
+            <button type='button' onClick={() => remove(index)}><AiFillDelete /></button>
+          </div>
         ))}
 
-        <input type="submit" />
-
-        <button onClick={() => setShowOverlay(false)}>Cancel</button>
+        <div>
+          <button onClick={() => setShowOverlay(false)}>Cancel</button>
+          <button type="submit">Supply</button>
+        </div>
       </form>
     </>
   )

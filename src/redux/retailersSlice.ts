@@ -19,38 +19,23 @@ const initialState: InitialState = {
     {
       id: uuidv4(),
       c_user: false,
-      name: 'kumar',
-      address: '34, joseph st., kamarajapuram, madurai - 9',
-      products: [
-        {
-          name: 'rice',
-          stock: 5
-        }
-      ]
+      name: 'Henry Shop',
+      address: ' 323, Leroy Lane,  Harold',
+      products: []
     },
     {
       id: uuidv4(),
       c_user: false,
-      name: 'kamal',
-      address: '34, joseph st., kamarajapuram, madurai - 9',
-      products: [
-        {
-          name: 'rice',
-          stock: 5
-        }
-      ]
+      name: 'Bruce Shop',
+      address: '4628, Lyndon Street, Northampton',
+      products: []
     },
     {
       id: uuidv4(),
       c_user: false,
-      name: 'rajini',
-      address: '34, joseph st., kamarajapuram, madurai - 9',
-      products: [
-        {
-          name: 'rice',
-          stock: 5
-        }
-      ]
+      name: 'Diana Shop',
+      address: '2540, Valley Street, Berlin',
+      products: []
     }
   ]
 }

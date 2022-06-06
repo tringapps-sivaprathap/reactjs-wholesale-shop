@@ -19,15 +19,15 @@ const RetailerComponent = ( { retailer }: RetailerProps) => {
   return (
     <div className="retailer-container">
       <div className='retailer-header'>
-        <p><b>Name:</b> {name}</p>
-        <p><b>Adress:</b> {address}</p>
+        <p><span>Name:</span> {name}</p>
+        <p><span>Adress:</span> {address}</p>
       </div>
 
       <div className='retailer-content'>
         {products.map((product) => (
           <div key={product.name}>
-            <p><b>Name:</b> {product.name}</p>
-            <p><b>Quantity:</b> {product.stock}</p>
+            <p>Product: {product.name}</p>
+            <p>Quantity: {product.stock}</p>
           </div>
         ))}
       </div>

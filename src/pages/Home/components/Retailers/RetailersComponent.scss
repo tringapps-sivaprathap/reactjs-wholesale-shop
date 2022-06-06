@@ -1,5 +1,9 @@
+$color1: #2C3531;
+
 .retailers-container {
   grid-area: retailers;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background-color: $color1;
 }
