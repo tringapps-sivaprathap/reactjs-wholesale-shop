@@ -47,7 +47,7 @@ const retailersSlice = createSlice({
     purchased: (state, action) => { // payload -> id, name, quantity
       const retailerIndex = state.retailers.findIndex((retailer) => retailer.id === action.payload.id)
       const productIndex = state.retailers[retailerIndex].products.findIndex((product) => {
-        return product.name == action.payload.name
+        return product.name === action.payload.name
       })
 
       if(productIndex === -1) {

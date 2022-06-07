@@ -37,29 +37,39 @@ $color-2: #E6E2DD;
 
   .single-purchase-form {
     background-color: $color-2;
-    @include displayFlex(center);
+    @include displayFlex(center, column);
     border: 2px solid #373A36;
     margin: 1rem;
     padding: .5rem;
     
-    & > * {
-      margin: 1vh 1.5vw;
+    .form-elements {
+      @include displayFlex(center, row);
+
+      & > * {
+        margin: 1vh 1.5vw;
+      }
+  
+      div {
+        @include displayFlex(center, column);
+        
+        > * {
+          margin: .3rem;
+        }
+  
+        :last-child {
+          padding: .3rem;
+        }
+  
+        .price {
+          background-color: white;
+          padding: .3rem 1rem;
+        }
+      }
     }
 
-    div {
-      @include displayFlex(center, column);
-      
-      > * {
-        margin: .3rem;
-      }
-
-      :last-child {
-        padding: .3rem;
-      }
-
-      .price {
-        background-color: white;
-        padding: .3rem 1rem;
+    .quantity-container {
+      input {
+        width: 6vw;
       }
     }
 
@@ -81,6 +91,20 @@ $color-2: #E6E2DD;
       border: none;
       padding: .5rem;
       font-size: 1.1rem;
+      box-shadow: 1px 1px 2px black;
+
+      &:active {
+        box-shadow: 2px 2px 4px black;
+      }
     }
+  }
+}
+
+.no-stock-message {
+  @include displayFlex(center);
+  height: 60vh;
+
+  p {
+    font-size: 1.5rem;
   }
 }

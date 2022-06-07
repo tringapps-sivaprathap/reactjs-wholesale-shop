@@ -31,6 +31,11 @@
       padding: 1vh 1vw;
       background-color: #2f4454;
       color: white;
+      box-shadow: 2px 2px 2px gray;
+
+      &:active {
+        box-shadow: 3px 3px 3px gray;
+      }
     }
   }
 }

@@ -50,4 +50,4 @@ const wholesalerSlice = createSlice({
 })
 
 export default wholesalerSlice.reducer
-export const {} = wholesalerSlice.actions
+// export const {} = wholesalerSlice.actions
