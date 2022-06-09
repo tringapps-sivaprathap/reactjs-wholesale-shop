@@ -5,7 +5,6 @@ import { useForm, useFieldArray, useWatch } from 'react-hook-form'
 import { Retailer, Inputs } from '../../../../../interfaces/interfaces'
 import { SiAddthis } from 'react-icons/si';
 import { AiFillDelete } from 'react-icons/ai';
-
 import './PurchaseComponent.scss'
 
 interface PurchaseComponentProps {
@@ -20,35 +19,12 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
   })
   const { fields, append, remove } = useFieldArray({name: 'cart', control})
 
-  const tempFormValues = useWatch({name: 'cart', control})
-  const [formValues, setFormValues] = useState(tempFormValues)
-
-  useEffect(() => {
-    setFormValues(tempFormValues.map((data) => isNaN(data.quantity) ? { ...data, quantity: 0 } : { ...data }))
-  }, [tempFormValues])
+  const formValues = useWatch({name: 'cart', control})
 
   // products - holds products values
-  const wholesalerProducts = useAppSelector((state) => state.wholesaler.products)
-  const [products, setProducts] = useState(wholesalerProducts)
-
-  const updateProducts = () => {
-    formValues.forEach((cartProduct) => {
-      setProducts((oldProducts) => {
-        return oldProducts.map((stockProduct) => {
-          if(stockProduct.name === cartProduct.name) {
-            if(stockProduct.stock - cartProduct.quantity <= 0) return { ...stockProduct, stock: 0 }
-            else return { ...stockProduct, stock: stockProduct.stock - cartProduct.quantity }
-          }
-          else return { ...stockProduct }
-        })
-      })
-    })
-  }
-
-  useEffect(() => {
-    setProducts(wholesalerProducts)
-    updateProducts()
-  }, [products, formValues])
+  const products = useAppSelector((state) => state.wholesaler.products)
+  console.log(products)
+  console.log(formValues)
 
   // showAdd - show add button
   const [showAdd, setShowAdd] = useState(false)
@@ -63,27 +39,10 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
     return index
   }
 
-  const getMax = (index: number): number | null => {
-    if(formValues[index]?.name && formValues[index].name !== '')
-      return wholesalerProducts[getIndex(formValues[index].name)].stock
-    return null
-  }
-
-  const getStock = (index: number): string => {
-    if(formValues[index]?.name && formValues[index].name !== '')
-      return String(products[getIndex(formValues[index].name)].stock)
-    return '-'
-  }
-
-  const checkAvailability = (index: number): string | null => {
-    if(formValues[index]?.name && formValues[index]?.quantity) {
-      if(formValues[index].name !== '' && formValues[index].quantity !== 0) {
-        if(products[getIndex(formValues[index].name)]?.stock === 0) {
-          return 'exceeding stock quantity'
-        }
-      }
-    }
-    return null
+  const getMax = (index: number): number | undefined => {
+    if(formValues[index]?.name && formValues[index]?.name !== '')
+      return products[getIndex(formValues[index].name)]?.stock
+    return undefined
   }
 
   const getPrice = (index: number): string => {
@@ -103,19 +62,18 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
   }
 
   const checkProducts = (): boolean => {
-    return wholesalerProducts.some((product) => product.stock > 0)
+    return products.some((product) => product.stock > 0)
   }
 
-  const getErrorMessage = (index: number): string | null => {
-    console.log(errors?.cart?.[index]?.quantity?.type)
+  const errorMessage = (index: number): string | boolean => {
     if(errors?.cart?.[index]?.name?.type === 'required') {
     return 'Select a product'
     }
-    else if(errors?.cart?.[index]?.quantity) {
-      return String(errors?.cart?.[index]?.quantity?.type)
+    else if(errors?.cart?.[index]?.quantity?.type === 'max') {
+      return 'you are reached the max limit'
       }
     else {
-      return null
+      return false
     }
   }
 
@@ -146,23 +104,18 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
                     {...register(`cart.${index}.name` as const, {required: true})}
                     className={errors?.cart?.[index]?.name ? "error" : ""}
                   >
-                    {wholesalerProducts.map((product) => product.stock > 0 && <option key={product.id} value={product.name}>{product.name}</option>)}
+                    {products.map((product) => product.stock > 0 && <option key={product.id} value={product.name}>{product.name}</option>)}
                   </select>
-                </div>
-
-                <div>
-                  <span>Stock</span>
-                  <span className='price'>{getStock(index)}</span>
                 </div>
 
                 <div className='quantity-container'>
                   <span>Quantity</span>
-                <input
-                  defaultValue={0} type="number" placeholder='quantity'
-                  {...register(`cart.${index}.quantity` as const, {required: true, valueAsNumber: true})}
-                  className={errors?.cart?.[index]?.quantity ? "error" : ""}
-                  min={1}
-                  {...(getMax(index) !== null && {max: `${getMax(index)}`})}
+                  <input
+                  defaultValue={0}
+                    type="number"
+                    placeholder='quantity'
+                    {...register(`cart.${index}.quantity` as const, {required: true, valueAsNumber: true, max: getMax(index)})}
+                    disabled={formValues[index]?.name === '' ? true : false}
                   />
                 </div>
 
@@ -176,12 +129,11 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
                   <span className='price'>{calculatePrice(index)}</span>
                 </div>
               </div>
-
+              
+              {errorMessage(index) &&
               <div className='error-message'>
-                {/* {checkAvailability(index) !== null && <span>{checkAvailability(index)}</span>} */}
-                {/* {errors?.cart?.[index]?.name && formValues[index].name === '' && <span>enter a name</span>} */}
-                {/* <span>{getErrorMessage(index) !== null && getErrorMessage(index)}</span> */}
-              </div>
+                <span>{errorMessage(index)}</span>
+              </div>}
 
               <button type='button' onClick={() => remove(index)}><AiFillDelete /></button>
             </div>
@@ -192,6 +144,8 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
             <button type="submit">Supply</button>
           </div>
         </form>
+        {/* {JSON.stringify(formValues)}
+        {JSON.stringify(retailer)} */}
       </>) 
       : (
         <div className='no-stock-message'>
