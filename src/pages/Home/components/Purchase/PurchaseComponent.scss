@@ -37,52 +37,80 @@ $color-2: #E6E2DD;
 
   .single-purchase-form {
     background-color: $color-2;
-    @include displayFlex(center, column);
+    display: grid;
+    grid-template-areas: 
+    'form-elements delete-button'
+    'error-message error-message';
     border: 2px solid #373A36;
-    margin: 1rem;
+    margin: 1.5rem;
     padding: .5rem;
     
+    // form elements container
     .form-elements {
+      grid-area: form-elements;
       @include displayFlex(center, row);
 
-      & > * {
-        margin: 1vh 1.5vw;
-      }
-  
-      div {
+      & > div {
+        // background-color: orange;
         @include displayFlex(center, column);
-        
-        > * {
-          margin: .3rem;
+        margin: .5rem;
+
+        & > * {
+          padding: .5rem;
+          // background-color: green;
         }
-  
-        :last-child {
-          padding: .3rem;
+
+        // :last-child {
+        //   padding: .5rem;
+        // }
+      }
+
+      .quantity-container {
+        input {
+          width: 8vw;
         }
-  
-        .price {
+      }
+
+      .price {
+        span:last-child {
           background-color: white;
-          padding: .3rem 1rem;
+          padding: 1vh 1vw;
+          margin: 0;
         }
       }
+
     }
 
-    .quantity-container {
-      input {
-        width: 6vw;
+    .error-message {
+      grid-area: error-message;
+      @include displayFlex(center);
+      padding: 1rem;
+
+      span {
+        color: red;
       }
     }
 
-    button {
-      @include iconStyle(1.6rem);
+    .delete-button {
+      grid-area: delete-button;
+      @include displayFlex(center);
+      padding: 1rem;
+
+      button {
+        @include iconStyle(1.6rem);
+        color: black;
+        padding: 0;
+      }
     }
   }
 
-  :last-child {
+  // supply and cancel button
+  .supply-cancel {
     @include displayFlex(center);
+    margin: 1rem;
 
     > * {
-      margin: 2vh 3vw;
+      margin: 0 3vw;
     }
 
     button {

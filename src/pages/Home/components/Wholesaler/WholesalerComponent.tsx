@@ -1,17 +1,7 @@
 import { FC } from 'react'
 import { useAppSelector } from '../../../../redux/hook'
+import { Retailer } from '../../../../interfaces/RetailerInterface'
 import './WholesalerComponent.scss'
-
-interface Retailer {
-  id: string,
-  c_user: boolean,
-  name: string,
-  address: string,
-  products: {
-    name: string,
-    stock: number
-  }[]
-}
 
 interface WholesalerComponentProps {
   setRetailer: React.Dispatch<React.SetStateAction<Retailer>>,

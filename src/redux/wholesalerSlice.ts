@@ -1,20 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { purchased } from './retailersSlice'
+import { Wholesaler } from '../interfaces/WholesalerInterface'
 import { v4 as uuidv4 } from 'uuid'
 
-type InitialState = {
-  name: string
-  products: {
-    id: string,
-    name: string,
-    stock: number,
-    price: number
-  }[]
-}
-
-const initialState: InitialState = {
+const initialState: Wholesaler = {
   name: 'DC Mart',
-  products: [
+  products: JSON.parse(localStorage.getItem('wholesaler-products') || JSON.stringify([
     {
       id: uuidv4(),
       name: 'Rice',
@@ -33,7 +24,7 @@ const initialState: InitialState = {
       stock: 150,
       price: 45
     }
-  ]
+  ]))
 }
 
 const wholesalerSlice = createSlice({
@@ -43,8 +34,9 @@ const wholesalerSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(purchased, (state, action) => {
       const index = state.products.findIndex((product) => product.name === action.payload.name)
-
       state.products[index].stock -= action.payload.quantity 
+
+      localStorage.setItem('wholesaler-products', JSON.stringify(state.products))
     })
   }
 })

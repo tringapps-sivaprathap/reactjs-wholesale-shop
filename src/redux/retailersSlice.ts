@@ -1,21 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { Retailer } from '../interfaces/RetailerInterface'
 import { v4 as uuidv4 } from 'uuid'
 
 type InitialState = {
-  retailers: {
-    id: string,
-    c_user: boolean,
-    name: string,
-    address: string,
-    products: {
-      name: string,
-      stock: number
-    }[]
-  }[]
+  retailers: Retailer[]
 }
 
 const initialState: InitialState = {
-  retailers: [
+  retailers: JSON.parse(localStorage.getItem('retailers') || JSON.stringify([
     {
       id: uuidv4(),
       c_user: false,
@@ -37,7 +29,7 @@ const initialState: InitialState = {
       address: '2540, Valley Street, Berlin',
       products: []
     }
-  ]
+  ]))
 }
 
 const retailersSlice = createSlice({
@@ -57,12 +49,7 @@ const retailersSlice = createSlice({
         state.retailers[retailerIndex].products[productIndex].stock += action.payload.quantity
       }
 
-      // state.retailers[index].products = state.retailers[index].products.map((product) => {
-      //   if(product.name === action.payload.name)
-      //     return { ...product, stock: product.stock += action.payload.quantity }
-      //   else
-      //     return { ...product }
-      // })
+      localStorage.setItem('retailers', JSON.stringify(state.retailers))
     }
   }
 })

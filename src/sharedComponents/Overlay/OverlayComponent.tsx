@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import PurchaseComponent from '../../pages/Home/components/Retailers/Purchase/PurchaseComponent'
+import PurchaseComponent from '../../pages/Home/components/Purchase/PurchaseComponent'
 import './OverlayComponent.scss'
 
 type Retailer = {

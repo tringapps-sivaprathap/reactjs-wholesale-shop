@@ -1,16 +1,8 @@
+import { Retailer } from '../../../../../interfaces/RetailerInterface'
 import './RetailerComponent.scss'
 
 type RetailerProps = {
-  retailer: {
-    id: string,
-    c_user: boolean,
-    name: string,
-    address: string,
-    products: {
-      name: string,
-      stock: number
-    }[]
-  }
+  retailer: Retailer
 }
 
 const RetailerComponent = ( { retailer }: RetailerProps) => {
@@ -27,7 +19,7 @@ const RetailerComponent = ( { retailer }: RetailerProps) => {
         {products.map((product) => (
           <div key={product.name}>
             <p>Product: {product.name}</p>
-            <p>Quantity: {product.stock}</p>
+            <p>Quantity: {product.stock} kg</p>
           </div>
         ))}
       </div>

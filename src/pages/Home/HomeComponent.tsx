@@ -2,18 +2,8 @@ import { FC, useState } from "react"
 import WholesalerComponent from "./components/Wholesaler/WholesalerComponent"
 import RetailersComponent from "./components/Retailers/RetailersComponent"
 import OverlayComponent from "../../sharedComponents/Overlay/OverlayComponent"
+import { Retailer } from "../../interfaces/RetailerInterface"
 import "./HomeComponent.scss"
-
-type Retailer = {
-  id: string,
-  c_user: boolean,
-  name: string,
-  address: string,
-  products: {
-    name: string,
-    stock: number
-  }[]
-}
 
 const HomeComponent: FC = () => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false)
