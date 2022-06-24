@@ -1,20 +1,17 @@
-@mixin flexDisplay($option) {
-  display: flex;
-  align-items: center;
-  justify-content: $option;
-}
+@use './../../../../sassStyles/variables' as *;
+@use './../../../../sassStyles/mixins' as *;
 
-.wholesaler-container {
-  background-color: #373A36;
+.wholesaler {
+  background-color: $wholesaler;
   color: white;
   grid-area: wholesaler;
   height: 15vh;
-  @include flexDisplay(space-evenly);
+  @include displayFlex(space-evenly);
 
-  div {
-    background-color: #E6E2DD;
+  .retailer {
+    background-color: $retailerSupply;
     color: black;
-    @include flexDisplay(center);
+    @include displayFlex(center);
     flex-direction: column;
     min-width: 8vw;
 
@@ -22,20 +19,20 @@
       margin: .5rem;
     }
 
-    span {
+    &__name {
       font-size: 1.1rem;
     }
 
-    button {
+    &__supply {
       border: none;
       padding: 1vh 1vw;
       background-color: #2f4454;
       color: white;
       box-shadow: 2px 2px 2px gray;
+    }
 
-      &:active {
-        box-shadow: 3px 3px 3px gray;
-      }
+    &__supply:active {
+      box-shadow: 3px 3px 3px gray;
     }
   }
 }

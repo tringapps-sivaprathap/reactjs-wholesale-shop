@@ -1,6 +1,6 @@
 import { useState, useEffect, FC } from 'react'
-import { useAppSelector, useAppDispatch } from '../../../../redux/hook'
-import { purchased } from '../../../../redux/retailersSlice'
+import { useAppSelector, useAppDispatch } from '../../../../app/hook'
+import { purchased } from '../../../../app/retailersSlice'
 import { useForm, useFieldArray, useWatch } from 'react-hook-form'
 import { Retailer } from '../../../../interfaces/RetailerInterface'
 import { Inputs } from '../../../../interfaces/FieldArrayInterface'

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useAppSelector } from '../../../../redux/hook'
+import { useAppSelector } from '../../../../app/hook'
 import { Retailer } from '../../../../interfaces/RetailerInterface'
 import './WholesalerComponent.scss'
 
@@ -13,13 +13,13 @@ const WholesalerComponent: FC<WholesalerComponentProps> = ({ setRetailer, setSho
   const name = useAppSelector((state) => state.wholesaler.name)
 
   return (
-    <div className="wholesaler-container">
-      <h2>{name}</h2>
+    <div className="wholesaler">
+      <h2 className='wholesaler__name'>{name}</h2>
       
       {retailers.map((retailer) => (
-        <div key={retailer.id}>
-          <span>{retailer.name}</span>
-          <button onClick={() => {setShowOverlay(true); setRetailer(retailer);}}>Supply</button>
+        <div className='retailer' key={retailer.id}>
+          <span className='retailer__name'>{retailer.name}</span>
+          <button className='retailer__supply' onClick={() => {setShowOverlay(true); setRetailer(retailer);}}>Supply</button>
         </div>
       ))}
     </div>

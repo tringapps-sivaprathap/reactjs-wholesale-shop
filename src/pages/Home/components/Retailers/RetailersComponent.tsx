@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../../../redux/hook'
+import { useAppSelector } from '../../../../app/hook'
 import RetailerComponent from './Retailer/RetailerComponent'
 import './RetailersComponent.scss'
 
