@@ -2,14 +2,14 @@
 @use './../../../../sassStyles/mixins' as *;
 
 .wholesaler {
-  background-color: $wholesaler;
+  background-color: $wholesaler-bg;
   color: white;
   grid-area: wholesaler;
   height: 15vh;
   @include displayFlex(space-evenly);
 
   .retailer {
-    background-color: $retailerSupply;
+    background-color: $wholesaler-retailer-bg;
     color: black;
     @include displayFlex(center);
     flex-direction: column;
@@ -26,7 +26,7 @@
     &__supply {
       border: none;
       padding: 1vh 1vw;
-      background-color: #2f4454;
+      background-color: $wholesaler-retailer-btn;
       color: white;
       box-shadow: 2px 2px 2px gray;
     }
