@@ -10,19 +10,36 @@ const initialState: Wholesaler = {
       id: uuidv4(),
       name: 'Rice',
       stock: 200,
-      price: 35
+      price: 35,
+      unit: 'kg'
     },
     {
       id: uuidv4(),
       name: 'Tomato',
       stock: 250,
-      price: 25
+      price: 25,
+      unit: 'kg'
     },
     {
       id: uuidv4(),
       name: 'Carrot',
       stock: 150,
-      price: 45
+      price: 45,
+      unit: 'kg'
+    },
+    {
+      id: uuidv4(),
+      name: 'Milk',
+      stock: 50,
+      price: 40,
+      unit: 'L'
+    },
+    {
+      id: uuidv4(),
+      name: 'Juice',
+      stock: 300,
+      price: 25,
+      unit: 'L'
     }
   ]))
 }

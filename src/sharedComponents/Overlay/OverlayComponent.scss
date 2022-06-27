@@ -1,27 +1,27 @@
-@mixin displayFlex ($jc: center, $fd: row) {
-  display: flex;
-  align-items: center;
-  justify-content: $jc;
-  flex-direction: $fd;
-}
+@use "../../sassStyles/mixins" as *;
 
-.overlay-container {
+.overlay__container {
   position: absolute;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   min-height: 100%;
-  @include displayFlex(center);
+  @include displayFlex();
 
   .overlay {
     margin: 10vh 0;
     background-color: #FDF5DF;
     width: 80%;
-    min-height: 80vh;
+    height: 80vh;
+    overflow-y: auto;
+    box-shadow: 5px 5px 20px black;
     @include displayFlex(flex-start, column);
 
-    .overlay-header {
+    &__header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
       background-color: #373A36;
       color: white;
       width: 100%;
@@ -32,9 +32,16 @@
       span > * {
         color: yellow;
       }
+
+      .overlay-close {
+        position: absolute;
+        right: 1.5vw;
+        @include iconStyle();
+        color: white;
+      }
     }
 
-    .overlay-content {
+    &__body {
       width: 100%;
       @include displayFlex(space-around, column);
       position: relative;

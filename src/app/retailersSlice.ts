@@ -43,7 +43,7 @@ const retailersSlice = createSlice({
       })
 
       if(productIndex === -1) {
-        state.retailers[retailerIndex].products.push({ name: action.payload.name, stock: action.payload.quantity})
+        state.retailers[retailerIndex].products.push({ name: action.payload.name, stock: action.payload.quantity, unit: action.payload.unit})
       }
       else {
         state.retailers[retailerIndex].products[productIndex].stock += action.payload.quantity

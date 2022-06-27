@@ -4,3 +4,10 @@
   justify-content: $jc;
   flex-direction: $fd;
 }
+
+@mixin iconStyle($fs: 1.5rem) {
+  @include displayFlex();
+  font-size: $fs;
+  border: none;
+  background-color: transparent;
+}

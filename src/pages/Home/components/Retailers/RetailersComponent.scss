@@ -1,9 +1,9 @@
-$color1: #2C3531;
+@use '../../../../sassStyles//variables' as *;
 
-.retailers-container {
+.retailers {
   grid-area: retailers;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
-  background-color: $color1;
+  background-color: $wholesaler-bg;
 }

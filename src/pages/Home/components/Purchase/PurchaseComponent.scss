@@ -1,22 +1,8 @@
-$color-1: #D48166;
-$color-2: #E6E2DD;
-
-@mixin displayFlex($jc: center, $fd: row) {
-  display: flex;
-  align-items: center;
-  justify-content: $jc;
-  flex-direction: $fd;
-}
-
-@mixin iconStyle($fs: 1.5rem) {
-  @include displayFlex(center);
-  font-size: $fs;
-  border: none;
-  background-color: transparent;
-}
+@use '../../../../sassStyles/variables' as *;
+@use '../../../../sassStyles/mixins' as *;
 
 .purchase-header {
-  background-color: $color-1;
+  background-color: $retailer-header-bg;
   color: white;
   @include displayFlex(center);
   padding: 1rem;
@@ -36,7 +22,7 @@ $color-2: #E6E2DD;
   @include displayFlex(center, column);
 
   .single-purchase-form {
-    background-color: $color-2;
+    background-color: $product-bg;
     display: grid;
     grid-template-areas: 
     'form-elements delete-button'
@@ -51,18 +37,12 @@ $color-2: #E6E2DD;
       @include displayFlex(center, row);
 
       & > div {
-        // background-color: orange;
         @include displayFlex(center, column);
-        margin: .5rem;
+        margin: 2vh 1.5vw;
 
         & > * {
           padding: .5rem;
-          // background-color: green;
         }
-
-        // :last-child {
-        //   padding: .5rem;
-        // }
       }
 
       .quantity-container {
@@ -114,7 +94,7 @@ $color-2: #E6E2DD;
     }
 
     button {
-      background-color: $color-1;
+      background-color: $retailer-header-bg;
       color: white;
       border: none;
       padding: .5rem;

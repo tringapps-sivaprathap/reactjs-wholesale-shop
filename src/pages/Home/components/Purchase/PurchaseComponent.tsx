@@ -1,13 +1,13 @@
-import { useState, useEffect, FC } from 'react'
-import { useAppSelector, useAppDispatch } from '../../../../app/hook'
-import { purchased } from '../../../../app/retailersSlice'
-import { useForm, useFieldArray, useWatch } from 'react-hook-form'
-import { Retailer } from '../../../../interfaces/RetailerInterface'
-import { Inputs } from '../../../../interfaces/FieldArrayInterface'
+import { useState, useEffect, FC } from 'react';
+import { useAppSelector, useAppDispatch } from '../../../../app/hook';
+import { purchased } from '../../../../app/retailersSlice';
+import { useForm, useFieldArray, useWatch } from 'react-hook-form';
+import { Retailer } from '../../../../interfaces/RetailerInterface';
+import { Inputs } from '../../../../interfaces/FieldArrayInterface';
 import { SiAddthis } from 'react-icons/si';
 import { AiFillDelete } from 'react-icons/ai';
-import SelectProuctComponent from './SelectProduct/SelectProuctComponent'
-import './PurchaseComponent.scss'
+import SelectProuctComponent from './SelectProduct/SelectProuctComponent';
+import './PurchaseComponent.scss';
 
 interface PurchaseComponentProps {
   retailer: Retailer,
@@ -34,10 +34,8 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
     const productsSelected = formValues.every((product) => product.name !== '')
     const productsAvailable = products.some((stockProduct) => formValues.every((cartProduct) => cartProduct.name !== stockProduct.name))
     
-    if(productsAvailable && stockAvailable && productsSelected)
-      setShowAdd(true)
-    else
-    setShowAdd(false)
+    if (productsAvailable && stockAvailable && productsSelected) setShowAdd(true)
+    else setShowAdd(false)
   }, [products, formValues])
 
   const getIndex = (name: string): number => {
@@ -84,11 +82,12 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
       return false
   }
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const onSubmit = (data: Inputs) => {
     data.cart.forEach((product) => {
-      dispatch(purchased({id: retailer.id, name: product.name, quantity: product.quantity}))
+      let productUnit = products.find((wholesaleProduct) => wholesaleProduct.name === product.name)?.unit;
+      dispatch(purchased({id: retailer.id, name: product.name, quantity: product.quantity, unit: productUnit}));
     })
     setShowOverlay(false)
   }
@@ -117,7 +116,7 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
                 </div>
 
                 <div className='quantity-container'>
-                  <span>Quantity (kg)</span>
+                  <span>Quantity</span>
                   <input
                     type="number"
                     placeholder='quantity'
@@ -149,10 +148,10 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
           ))}
           </div>
 
-          <div className='supply-cancel'>
+          {formValues.length !== 0 && <div className='supply-cancel'>
             <button onClick={() => setShowOverlay(false)}>Cancel</button>
             <button type="submit">Supply</button>
-          </div>
+          </div>}
         </form>
       </>) 
       : (
@@ -161,7 +160,7 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default PurchaseComponent
+export default PurchaseComponent;

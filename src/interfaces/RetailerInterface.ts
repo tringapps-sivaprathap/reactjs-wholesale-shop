@@ -1,9 +1,10 @@
 export interface Product {
   name: string,
-  stock: number
+  stock: number,
+  unit: string
 }
 
-export type Retailer = {
+export interface Retailer {
   id: string,
   c_user: boolean,
   name: string,

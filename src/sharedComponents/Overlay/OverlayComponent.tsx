@@ -1,17 +1,8 @@
-import { FC } from 'react'
-import PurchaseComponent from '../../pages/Home/components/Purchase/PurchaseComponent'
-import './OverlayComponent.scss'
-
-type Retailer = {
-  id: string,
-  c_user: boolean,
-  name: string,
-  address: string,
-  products: {
-    name: string,
-    stock: number
-  }[]
-}
+import { FC } from 'react';
+import { Retailer } from '../../interfaces/RetailerInterface';
+import { FaWindowClose } from 'react-icons/fa';
+import PurchaseComponent from '../../pages/Home/components/Purchase/PurchaseComponent';
+import './OverlayComponent.scss';
 
 interface OverlayComponentProps {
   retailer: Retailer,
@@ -20,18 +11,20 @@ interface OverlayComponentProps {
 
 const OverlayComponent: FC<OverlayComponentProps> = ({ retailer, setShowOverlay }) => {
   return (
-    <div className="overlay-container">
+    <div className="overlay__container">
       <div className='overlay'>
-        <div className='overlay-header'>
+        <div className='overlay__header'>
           <span><span>Name:</span> {retailer.name}</span>
           <span><span>Address:</span> {retailer.address}</span>
+          <button className='overlay-close'><FaWindowClose onClick={() => setShowOverlay(false)} /></button>
         </div>
-        <div className='overlay-content'>
+
+        <div className='overlay__body'>
           <PurchaseComponent retailer={retailer} setShowOverlay={setShowOverlay} />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OverlayComponent
+export default OverlayComponent;
