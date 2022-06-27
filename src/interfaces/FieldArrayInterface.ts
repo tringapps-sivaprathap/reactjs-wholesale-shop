@@ -1,8 +1,8 @@
 export interface Product {
-  name: string,
-  quantity: number
+  name: string;
+  quantity: number;
 }
 
 export interface Inputs {
-  cart: Product[]
+  cart: Product[];
 }
