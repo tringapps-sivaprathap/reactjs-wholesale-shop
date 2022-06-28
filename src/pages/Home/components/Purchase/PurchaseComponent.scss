@@ -2,6 +2,8 @@
 @use '../../../../sassStyles/mixins' as *;
 
 .purchase-header {
+  position: sticky;
+  top: 57px;
   background-color: $retailer-header-bg;
   color: white;
   @include displayFlex(center);

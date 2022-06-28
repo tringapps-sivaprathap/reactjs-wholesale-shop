@@ -36,7 +36,7 @@ const retailersSlice = createSlice({
   name: 'retailers',
   initialState,
   reducers: {
-    purchased: (state, action) => { // payload -> id, name, quantity
+    purchased: (state, action) => { // payload -> id, name, quantity, unit
       const retailerIndex = state.retailers.findIndex((retailer) => retailer.id === action.payload.id)
       const productIndex = state.retailers[retailerIndex].products.findIndex((product) => {
         return product.name === action.payload.name
