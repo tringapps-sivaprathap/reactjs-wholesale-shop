@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useAppSelector } from '../../../../app/hook';
+import { useAppSelector } from '../../../../redux/hook';
 import { Retailer } from '../../../../interfaces/RetailerInterface';
 import OverlayComponent from "../../../../sharedComponents/Overlay/OverlayComponent";
 import './WholesalerComponent.scss';

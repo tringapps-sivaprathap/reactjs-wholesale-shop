@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useAppSelector } from '../../../../app/hook';
+import { useAppSelector } from '../../../../redux/hook';
 import RetailerComponent from './Retailer/RetailerComponent';
 import './RetailersComponent.scss';
 
