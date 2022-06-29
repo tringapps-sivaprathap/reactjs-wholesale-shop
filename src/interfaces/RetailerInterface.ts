@@ -6,6 +6,7 @@ export interface Product {
 
 export interface Retailer {
   id: string;
+  date: Date;
   c_user: boolean;
   name: string;
   address: string;

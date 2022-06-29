@@ -10,6 +10,7 @@ const initialState: InitialState = {
   retailers: JSON.parse(localStorage.getItem('retailers') || JSON.stringify([
     {
       id: uuidv4(),
+      date: new Date(),
       c_user: false,
       name: 'Henry Shop',
       address: ' 323, Leroy Lane,  Harold',
@@ -17,6 +18,7 @@ const initialState: InitialState = {
     },
     {
       id: uuidv4(),
+      date: new Date(),
       c_user: false,
       name: 'Bruce Shop',
       address: '4628, Lyndon Street, Northampton',
@@ -24,6 +26,7 @@ const initialState: InitialState = {
     },
     {
       id: uuidv4(),
+      date: new Date(),
       c_user: false,
       name: 'Diana Shop',
       address: '2540, Valley Street, Berlin',
@@ -48,6 +51,8 @@ const retailersSlice = createSlice({
       else {
         state.retailers[retailerIndex].products[productIndex].stock += action.payload.quantity
       }
+
+      state.retailers[retailerIndex].date = new Date();
 
       localStorage.setItem('retailers', JSON.stringify(state.retailers))
     }

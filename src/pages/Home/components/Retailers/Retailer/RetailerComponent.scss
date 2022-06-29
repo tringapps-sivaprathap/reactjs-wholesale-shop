@@ -41,4 +41,13 @@
       }
     }
   }
+
+  &__body--empty {
+    height: 100%;
+    @include displayFlex();
+
+    p {
+      font-size: 1.2rem;
+    }
+  }
 }

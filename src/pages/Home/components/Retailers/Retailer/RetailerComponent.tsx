@@ -7,7 +7,7 @@ interface RetailerProps {
 }
 
 const RetailerComponent: FC<RetailerProps> = ({ retailer }) => {
-  const { name, address, products } = retailer;
+  const { name, address, products, date } = retailer;
 
   return (
     <div className="retailer">
@@ -16,9 +16,11 @@ const RetailerComponent: FC<RetailerProps> = ({ retailer }) => {
         <p><span>Adress:</span> {address}</p>
       </div>
 
-      <div className='retailer__body'>
+      <div className={ products.length === 0 ? 'retailer__body--empty' : 'retailer__body'}>
+        {products.length === 0 && <p>Haven't purchased yet!</p>}
         {products.map((product) => (
           <div className='product' key={product.name}>
+            <p>Date: {new Date(date).toLocaleDateString().slice(0, 10).replaceAll('/', '-')}</p>
             <p>Product: {product.name}</p>
             <p>Quantity: {product.stock}{product.unit}</p>
           </div>
