@@ -39,26 +39,26 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
   }, [products, formValues])
 
   const getIndex = (name: string): number => {
-    const index = products.findIndex((product) => product.name === name)
-    return index
+    return products.findIndex((product) => product.name === name)
   }
 
   const getMax = (index: number): number | undefined => {
-    if(formValues[index]?.name && formValues[index]?.name !== '')
+    if (formValues[index]?.name && formValues[index]?.name !== '')
       return products[getIndex(formValues[index].name)]?.stock
     return undefined
   }
 
   const getPrice = (index: number): React.ReactNode => {
-    if(formValues[index]?.name && formValues[index].name !== '')
-        return <span>{products[getIndex(formValues[index].name)]?.price} &#8377;</span>
+    if (formValues[index]?.name && formValues[index].name !== '')
+      return <span>{products[getIndex(formValues[index].name)]?.price} &#8377;</span>
+    else
       return <span>-</span>
   }
 
   const calculatePrice = (index: number): React.ReactNode => {
-    if(formValues[index]?.name && formValues[index]?.quantity) {
-      if(formValues[index].name !== '' && formValues[index].quantity !== 0) {
-        if(products[getIndex(formValues[index].name)]?.stock > 0 && formValues[index].quantity !== 0) 
+    if (formValues[index]?.name && formValues[index]?.quantity) {
+      if (formValues[index].name !== '' && formValues[index].quantity !== 0) {
+        if (products[getIndex(formValues[index].name)]?.stock > 0 && formValues[index].quantity !== 0) 
           return <span>{products[getIndex(formValues[index].name)].price * formValues[index].quantity} &#8377;</span>
       }
     }
@@ -70,13 +70,13 @@ const PurchaseComponent: FC<PurchaseComponentProps> = ({ retailer, setShowOverla
   }
 
   const errorMessage = (index: number): string | boolean => {
-    if(errors?.cart?.[index]?.name?.type === 'required')
+    if (errors?.cart?.[index]?.name?.type === 'required')
       return 'Select a product!'
-    else if(errors?.cart?.[index]?.quantity?.type === 'required')
+    else if (errors?.cart?.[index]?.quantity?.type === 'required')
       return 'Quantity is required!'
-    else if(errors?.cart?.[index]?.quantity?.type === 'min')
+    else if (errors?.cart?.[index]?.quantity?.type === 'min')
       return 'Enter atleast 1kg!'
-    else if(errors?.cart?.[index]?.quantity?.type === 'max')
+    else if (errors?.cart?.[index]?.quantity?.type === 'max')
       return "Don't have this much of stock!"
     else
       return false
